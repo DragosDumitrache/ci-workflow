@@ -6,7 +6,7 @@ on:
 defaults:
   run:
     shell: bash
-    working-directory: .github/workflows/danger
+    working-directory: .github/danger
 
 jobs:
   build:
