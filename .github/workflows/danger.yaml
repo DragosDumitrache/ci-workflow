@@ -28,7 +28,7 @@ jobs:
       - name: List files
         run: |
           ls ~
-          ls work
+          ls ~/work
 #          ls dangerjs
 #          ls danger
 #          cd actions/dangerjs
