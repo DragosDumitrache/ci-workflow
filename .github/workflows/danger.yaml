@@ -17,7 +17,7 @@ jobs:
       - name: Danger
         uses: danger/danger-js@9.1.6
         with:
-          dangerfile: .dangerfile.ts
+          args: "--dangerfile dangerfile.ts
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
