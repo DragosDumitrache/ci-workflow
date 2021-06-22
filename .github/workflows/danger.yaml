@@ -6,7 +6,6 @@ on:
 defaults:
   run:
     shell: bash
-    working-directory: .github/danger
 
 jobs:
   build:
@@ -24,7 +23,12 @@ jobs:
           repository: DragosDumitrache/actions-library
           token: ${{ secrets.GH_TOKEN }}
           path: .github/actions/dangerjs
-
+      - name: List files
+        run: |
+          ls ~
+          ls .github
+          ls .github/actions
+          cd .github/actions/dangerjs
       - name: Run danger
         uses: ./.github/actions/dangerjs
         id: danger-js
