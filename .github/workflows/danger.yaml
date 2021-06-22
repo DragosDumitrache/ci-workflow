@@ -13,9 +13,9 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - name: Version tag
-        id: tag
-        uses: DragosDumitrache/versioner@v1.3
+#      - name: Version tag
+#        id: tag
+#        uses: DragosDumitrache/versioner@v1.3
 
 #      - name: CD to actions
 #        run: cd actions
@@ -28,9 +28,9 @@ jobs:
       - name: List files
         run: |
           ls ~
-          ls actions
-          ls dangerjs
-          ls danger
+          ls work
+#          ls dangerjs
+#          ls danger
 #          cd actions/dangerjs
 
       - name: Run danger
