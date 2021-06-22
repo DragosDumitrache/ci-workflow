@@ -13,12 +13,6 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-#      - name: Version tag
-#        id: tag
-#        uses: DragosDumitrache/versioner@v1.3
-
-#      - name: CD to actions
-#        run: cd actions
       - name: Checkout actions library
         uses: actions/checkout@v2
         with:
@@ -30,6 +24,7 @@ jobs:
           ls ~
           ls ~/work
           ls ~/_actions
+          ls ~/ci_workflow
 #          ls dangerjs
 #          ls danger
 #          cd actions/dangerjs
