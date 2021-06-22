@@ -22,9 +22,7 @@ jobs:
       - name: List files
         run: |
           ls ~
-          ls ~/work
-          ls ~/_actions
-          ls ~/ci_workflow
+          ls ~/ci_workflow/.github/actions
 #          ls dangerjs
 #          ls danger
 #          cd actions/dangerjs
