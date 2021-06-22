@@ -22,3 +22,5 @@ jobs:
 
       - name: Run danger
         uses: ./.private-actions/dangerjs
+        with:
+          dangerfile: .github/danger/dangerfile.ts
