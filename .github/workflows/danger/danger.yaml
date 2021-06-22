@@ -1,0 +1,25 @@
+name: DangerJS Notification
+on:
+  pull_request:
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+    working-directory: .github/workflows/danger
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Version tag
+        id: tag
+        uses: DragosDumitrache/versioner@v1.3
+
+      - uses: actions/checkout@v2
+        with:
+          repository: DragosDumitrache/actions-library
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: .github/actions/dangerjs
