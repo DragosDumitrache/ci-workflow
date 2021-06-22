@@ -2,6 +2,11 @@ name: 'dangerjs'
 inputs:
   dangerfile:
     description: Which dangerfile to use
+
+defaults:
+  run:
+    shell: bash
+
 runs:
   using: composite
   steps:
@@ -10,4 +15,4 @@ runs:
       run: |
         yarn danger ci --dangerfile ${{ inputs.dangerfile }}
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}

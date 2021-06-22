@@ -29,3 +29,5 @@ jobs:
         uses: ./.github/actions/dangerjs
         with:
           dangerfile: .github/danger/dangerfile.ts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
