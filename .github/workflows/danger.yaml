@@ -21,7 +21,7 @@ jobs:
           path: .github/actions/dangerjs
       - name: List files
         run: |
-          ls .github
+          ls .github/actions
 
 #      - name: Run danger
 #        uses: ./.github/actions/dangerjs
