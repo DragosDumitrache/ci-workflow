@@ -5,7 +5,7 @@ message("ENV Var check: \n - ";
 markdown("Hello There!")
 
 const fs = require('fs')
-const output = fs.readFile('/etc/hosts', 'utf8', function (err,data) {
+const output = fs.readFile('plan.out', 'utf8', function (err,data) {
   return data.split('\n');
 };
 
