@@ -18,11 +18,7 @@ jobs:
         with:
           repository: DragosDumitrache/actions-library
           token: ${{ secrets.GH_TOKEN }}
-          path: .github/actions/dangerjs
-      - name: List files
-        run: |
-          ls .github/actions/dangerjs
+          path: .private-actions/
 
-#      - name: Run danger
-#        uses: ./.github/actions/dangerjs
-#        id: danger-js
+      - name: Run danger
+        uses: ./.private-actions/dangerjs
