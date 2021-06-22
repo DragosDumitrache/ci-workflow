@@ -17,8 +17,8 @@ jobs:
         id: tag
         uses: DragosDumitrache/versioner@v1.3
 
-      - name: CD to actions
-        run: cd actions
+#      - name: CD to actions
+#        run: cd actions
       - name: Checkout actions library
         uses: actions/checkout@v2
         with:
@@ -29,7 +29,10 @@ jobs:
         run: |
           ls ~
           ls actions
-          cd actions/dangerjs
+          ls dangerjs
+          ls danger
+#          cd actions/dangerjs
+
       - name: Run danger
         uses: ./.github/actions/dangerjs
         id: danger-js
