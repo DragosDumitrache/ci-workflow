@@ -18,8 +18,13 @@ jobs:
         id: tag
         uses: DragosDumitrache/versioner@v1.3
 
-      - uses: actions/checkout@v2
+      - name: Checkout actions library
+        uses: actions/checkout@v2
         with:
           repository: DragosDumitrache/actions-library
           token: ${{ secrets.GH_TOKEN }}
           path: .github/actions/dangerjs
+
+      - name: Run danger
+        uses: ./.github/actions/dangerjs
+        id: danger-js
