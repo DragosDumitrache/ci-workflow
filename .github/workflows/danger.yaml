@@ -6,7 +6,6 @@ on:
 defaults:
   run:
     shell: bash
-    working-directory: .github/actions/dangerjs
 
 jobs:
   build:
@@ -15,9 +14,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Run danger
-        uses: ./.github/actions/dangerjs
+      - name: Danger
+        uses: danger/danger-js@9.1.6
         with:
-          dangerfile: .github/danger/dangerfile.ts
+          dangerfile: .dangerfile.ts
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
