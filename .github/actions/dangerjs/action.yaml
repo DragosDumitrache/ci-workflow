@@ -1,0 +1,20 @@
+name: 'dangerjs'
+inputs:
+  dangerfile:
+    description: Which dangerfile to use
+runs:
+  using: composite
+  steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - uses: borales/actions-yarn@v2.3.0
+      with:
+        cmd: install
+
+    - name: DangerJS
+      run: |
+        yarn danger ci --dangerfile ${{ inputs.dangerfile }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

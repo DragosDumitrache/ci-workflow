@@ -13,14 +13,14 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - name: Checkout actions library
-        uses: actions/checkout@v2
-        with:
-          repository: DragosDumitrache/actions-library
-          token: ${{ secrets.GH_TOKEN }}
-          path: .private-actions/
+#      - name: Checkout actions library
+#        uses: actions/checkout@v2
+#        with:
+#          repository: DragosDumitrache/actions-library
+#          token: ${{ secrets.GH_TOKEN }}
+#          path: .private-actions/
 
       - name: Run danger
-        uses: ./.private-actions/dangerjs
+        uses: ./.github/actions/dangerjs
         with:
           dangerfile: .github/danger/dangerfile.ts
