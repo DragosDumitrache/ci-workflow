@@ -19,6 +19,11 @@ jobs:
 #          repository: DragosDumitrache/actions-library
 #          token: ${{ secrets.GH_TOKEN }}
 #          path: .private-actions/
+      - name: cd to danger
+        run: cd .github/actions/dangerjs
+      - uses: borales/actions-yarn@v2.3.0
+        with:
+          cmd: install
 
       - name: Run danger
         uses: ./.github/actions/dangerjs
