@@ -21,9 +21,9 @@ jobs:
 #          token: ${{ secrets.GITHUB_TOKEN }}
 #          path: ./.github/actions/actions-library
       - name: "Salut"
-        uses: ./.github/actions/actions-library/greetings
+        uses: ./.github/actions/greetings
       - name: "Hipster"
-        uses: ./.github/actions/actions-library/wazzap
+        uses: ./.github/actions/wazzap
 #      - name: "Salut"
 #        uses: dragosdumitrache/actions-library/greetings@main
 #      - name: "Hipster"
