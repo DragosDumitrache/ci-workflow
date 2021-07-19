@@ -13,7 +13,18 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+        with:
+          repository: dragosdumitrache/actions-library
+          ref: refs/heads/main
+          # GitHub's personal access token with access to `my-organization/awesome-action`
+          token: $secrets.GITHUB_TOKEN
+          path: ./.github/actions/actions-library
       - name: "Salut"
-        uses: dragosdumitrache/actions-library/greetings@main
+        uses: ./.github/actions/actions-library/greetings
       - name: "Hipster"
-        uses: dragosdumitrache/actions-library/wazzap@main
+        uses: ./.github/actions/actions-library/wazzap
+#      - name: "Salut"
+#        uses: dragosdumitrache/actions-library/greetings@main
+#      - name: "Hipster"
+#        uses: dragosdumitrache/actions-library/wazzap@main
