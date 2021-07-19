@@ -13,10 +13,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - name: Danger
-        uses: danger/danger-js@9.1.6
-        with:
-          args: "--dangerfile dangerfile.ts"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-
+      - name: "Salut"
+        uses: dragosdumitrache/actions-library/greetings@main
+      - name: "Hipster"
+        uses: dragosdumitrache/actions-library/wazzap@main
