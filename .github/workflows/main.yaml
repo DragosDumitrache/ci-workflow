@@ -18,7 +18,7 @@ jobs:
           repository: dragosdumitrache/actions-library
           ref: refs/heads/main
           # GitHub's personal access token with access to `my-organization/awesome-action`
-          token: $secrets.GITHUB_TOKEN
+          token: ${{ secrets.GITHUB_TOKEN }}
           path: ./.github/actions/actions-library
       - name: "Salut"
         uses: ./.github/actions/actions-library/greetings
