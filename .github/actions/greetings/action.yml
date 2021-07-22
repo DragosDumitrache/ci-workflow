@@ -13,4 +13,6 @@ runs:
   steps:
       - name: Salut
         shell: bash
-        run: echo "Hello, ${{ inputs.who-to-greet }}!"
+        run: |
+          echo "Hello, ${{ inputs.who-to-greet }}!"
+          echo ${{ inputs.random-args }}

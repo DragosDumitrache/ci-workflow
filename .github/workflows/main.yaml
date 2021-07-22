@@ -2,6 +2,10 @@ name: DangerJS Notification
 on:
   pull_request:
   workflow_dispatch:
+    inputs:
+      random-args:
+        description: Precisely that
+        required: false
 
 defaults:
   run:
@@ -27,9 +31,7 @@ jobs:
         uses: ./.github/actions/greetings
         with:
           who-to-greet: ${{ matrix.name }}
-#          random-args:
-#            magic: "Abracadabra"
-#            non-magic: "Hocus-pocus"
+          random-args: ${{ github.event.inputs }}
       - name: "Hipster"
         uses: ./.github/actions/wazzap
 #      - name: "Salut"
