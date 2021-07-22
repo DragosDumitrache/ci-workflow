@@ -5,6 +5,9 @@ inputs:
     description: 'Who to greet'
     required: true
     default: 'World'
+  random-args:
+    description: 'A map of random args'
+    required: false
 runs:
   using: composite
   steps:

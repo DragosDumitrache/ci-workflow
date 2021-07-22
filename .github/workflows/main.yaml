@@ -16,17 +16,20 @@ jobs:
         name: [ 'Dragos', 'Dragons', 'Dragonel' ]
     steps:
       - uses: actions/checkout@v2
-#      - uses: actions/checkout@v2
-#        with:
-#          repository: dragosdumitrache/actions-library
-#          ref: refs/heads/main
-#          # GitHub's personal access token with access to `my-organization/awesome-action`
-#          token: ${{ secrets.GITHUB_TOKEN }}
-#          path: ./.github/actions/actions-library
+      #      - uses: actions/checkout@v2
+      #        with:
+      #          repository: dragosdumitrache/actions-library
+      #          ref: refs/heads/main
+      #          # GitHub's personal access token with access to `my-organization/awesome-action`
+      #          token: ${{ secrets.GITHUB_TOKEN }}
+      #          path: ./.github/actions/actions-library
       - name: "Salut"
         uses: ./.github/actions/greetings
         with:
           who-to-greet: ${{ matrix.name }}
+          random-args:
+            magic: "Abracadabra"
+            non-magic: "Hocus-pocus"
       - name: "Hipster"
         uses: ./.github/actions/wazzap
 #      - name: "Salut"
