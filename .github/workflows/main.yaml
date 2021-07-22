@@ -31,7 +31,7 @@ jobs:
         uses: ./.github/actions/greetings
         with:
           who-to-greet: ${{ matrix.name }}
-          random-args: ${{ github.event.inputs }}
+          random-args: ${{ github.event.inputs.random-args }}
       - name: "Hipster"
         uses: ./.github/actions/wazzap
 #      - name: "Salut"
