@@ -2,6 +2,10 @@ name: DangerJS Notification
 on:
   pull_request:
   workflow_dispatch:
+    inputs:
+      random-args:
+        description: Precisely that
+        required: false
 
 defaults:
   run:
@@ -11,9 +15,26 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        name: [ 'Dragos', 'Dragons', 'Dragonel' ]
     steps:
       - uses: actions/checkout@v2
+      #      - uses: actions/checkout@v2
+      #        with:
+      #          repository: dragosdumitrache/actions-library
+      #          ref: refs/heads/main
+      #          # GitHub's personal access token with access to `my-organization/awesome-action`
+      #          token: ${{ secrets.GITHUB_TOKEN }}
+      #          path: ./.github/actions/actions-library
       - name: "Salut"
-        uses: dragosdumitrache/actions-library/greetings@main
+        uses: ./.github/actions/greetings
+        with:
+          who-to-greet: ${{ matrix.name }}
+          random-args: ${{ github.event.inputs }}
       - name: "Hipster"
-        uses: dragosdumitrache/actions-library/wazzap@main
+        uses: ./.github/actions/wazzap
+#      - name: "Salut"
+#        uses: dragosdumitrache/actions-library/greetings@main
+#      - name: "Hipster"
+#        uses: dragosdumitrache/actions-library/wazzap@main

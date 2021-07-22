@@ -1,0 +1,18 @@
+name: Greetings
+description: "Hello, World!"
+inputs:
+  who-to-greet:  # id of input
+    description: 'Who to greet'
+    required: true
+    default: 'World'
+  random-args:
+    description: 'A map of random args'
+    required: false
+runs:
+  using: composite
+  steps:
+      - name: Salut
+        shell: bash
+        run: |
+          echo "Hello, ${{ inputs.who-to-greet }}!"
+          echo ${{ inputs.random-args }}
