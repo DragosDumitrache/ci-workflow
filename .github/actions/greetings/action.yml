@@ -16,6 +16,6 @@ runs:
         run: |
           echo "Hello, ${{ inputs.who-to-greet }}!"
           LOG_LEVEL=$(echo "${{ inputs.random-args }}" | jq -r '."log-level"')
-          if [[ -n "$log_level" ]]; then
+          if [[ -n "$LOG_LEVEL" ]]; then
             echo "Setting logging level to $LOG_LEVEL"
           fi
