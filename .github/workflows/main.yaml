@@ -27,9 +27,9 @@ jobs:
         uses: ./.github/actions/greetings
         with:
           who-to-greet: ${{ matrix.name }}
-          random-args:
-            magic: "Abracadabra"
-            non-magic: "Hocus-pocus"
+#          random-args:
+#            magic: "Abracadabra"
+#            non-magic: "Hocus-pocus"
       - name: "Hipster"
         uses: ./.github/actions/wazzap
 #      - name: "Salut"
