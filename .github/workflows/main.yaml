@@ -3,9 +3,6 @@ on:
   pull_request:
   workflow_dispatch:
     inputs:
-      random-args:
-        description: Precisely that
-        required: false
 
 defaults:
   run:
@@ -15,26 +12,35 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-20.04
-    strategy:
-      matrix:
-        name: [ 'Dragos', 'Dragons', 'Dragonel' ]
     steps:
-      - uses: actions/checkout@v2
-      #      - uses: actions/checkout@v2
-      #        with:
-      #          repository: dragosdumitrache/actions-library
-      #          ref: refs/heads/main
-      #          # GitHub's personal access token with access to `my-organization/awesome-action`
-      #          token: ${{ secrets.GITHUB_TOKEN }}
-      #          path: ./.github/actions/actions-library
-      - name: "Salut"
-        uses: ./.github/actions/greetings
-        with:
-          who-to-greet: ${{ matrix.name }}
-          random-args: ${{ github.event.inputs.random-args }}
-      - name: "Hipster"
-        uses: ./.github/actions/wazzap
-#      - name: "Salut"
-#        uses: dragosdumitrache/actions-library/greetings@main
-#      - name: "Hipster"
-#        uses: dragosdumitrache/actions-library/wazzap@main
+      - uses: actions/checkout@v3
+      - name: Check changes to topic atlantis.yaml
+        id: check_atlantis
+        run: |
+          # Use github.event.before, which should represent the SHA of the
+          # previous commit on master, as the ref to diff against.
+          # This should do the right thing in the case of merge commits.
+          if [ -z "$(git diff-tree --name-only -r HEAD ${{ github.event.before }} **/atlantis.yaml)" ]; then
+            echo "Atlantis yaml $1 unchanged"
+            exit 0
+          fi
+
+          echo "atlantis_changed=changed" >> $GITHUB_OUTPUT
+      - name: Check changes to any TF
+        id: check_tf
+        run: |
+          # Use github.event.before, which should represent the SHA of the
+          # previous commit on master, as the ref to diff against.
+          # This should do the right thing in the case of merge commits.
+          if [ -z "$(git diff-tree --name-only -r HEAD ${{ github.event.before }} **/*.tf)" ] || [ -z "$(git diff-tree --name-only -r HEAD ${{ github.event.before }} **/*.tfvalues)" ]; then
+            echo "terraform unchanged"
+            exit 0
+          fi
+
+          echo "tf_changed=changes" >> $GITHUB_OUTPUT
+
+      - name: Print output
+        if: steps.check_atlantis.outputs.atlantis_changed == 'changed' and steps.check_tf.outputs.tf_changed == 'changed'
+        run: |
+          echo "Changes to `atlantis.yaml` have to be done independently from changes to any terraform files"
+          exit 1
