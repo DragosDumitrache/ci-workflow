@@ -32,7 +32,7 @@ jobs:
           # Use github.event.before, which should represent the SHA of the
           # previous commit on master, as the ref to diff against.
           # This should do the right thing in the case of merge commits.
-          if [ -z "$(git diff-tree --name-only -r HEAD ${{ github.event.before }} **/*.tf)" ] || [ -z "$(git diff-tree --name-only -r HEAD ${{ github.event.before }} **/*.tfvalues)" ]; then
+          if [ -z "$(git diff-tree --name-only -r HEAD **/*.tf)" ] || [ -z "$(git diff-tree --name-only -r HEAD **/*.tfvalues)" ]; then
             echo "terraform unchanged"
             exit 0
           fi
