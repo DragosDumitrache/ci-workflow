@@ -20,7 +20,7 @@ jobs:
           # Use github.event.before, which should represent the SHA of the
           # previous commit on master, as the ref to diff against.
           # This should do the right thing in the case of merge commits.
-          if [ -z "$(git diff-tree --name-only -r HEAD ${{ github.event.before }} **/atlantis.yaml)" ]; then
+          if [ -z "$(git diff-tree --name-only -r HEAD **/atlantis.yaml)" ]; then
             echo "Atlantis yaml $1 unchanged"
             exit 0
           fi
