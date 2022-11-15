@@ -22,7 +22,7 @@ jobs:
           # Use github.event.before, which should represent the SHA of the
           # previous commit on master, as the ref to diff against.
           # This should do the right thing in the case of merge commits.
-          if [ "$(git diff-tree --exit-code ${{ github.event.pull_request.base.sha }} ${{ github.event.before.sha }} **/atlantis.yaml)" ]; then
+          if [ "$(git diff-tree --exit-code -r HEAD ${{ github.event.before }} **/atlantis.yaml)" ]; then
             echo "atlantis_changed=changed" >> $GITHUB_OUTPUT
           else
             echo "atlantis_changed=unchanged" >> $GITHUB_OUTPUT
@@ -34,7 +34,7 @@ jobs:
           # Use github.event.before, which should represent the SHA of the
           # previous commit on master, as the ref to diff against.
           # This should do the right thing in the case of merge commits.
-          if [ "$(git diff-tree --exit-code ${{ github.event.pull_request.base.sha }} ${{ github.event.before.sha }} **/*.tf)" ] || [ "$(git diff-tree --exit-code ${{ github.event.pull_request.base.sha }} ${{ github.event.before.sha }} **/*.tfvalues)" ]; then
+          if [ "$(git diff-tree --exit-code -r HEAD ${{ github.event.before }} **/*.tf)" ] || [ "$(git diff-tree --exit-code -r HEAD ${{ github.event.before }} **/*.tfvalues)" ]; then
             echo "tf_changed=changed" >> $GITHUB_OUTPUT
           else
             echo "tf_changed=unchanged" >> $GITHUB_OUTPUT
