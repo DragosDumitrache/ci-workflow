@@ -14,7 +14,8 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-        fetch-depth: 0
+        with:
+          fetch-depth: 0
       - name: Check changes to topic atlantis.yaml
         id: check_atlantis
         run: |
