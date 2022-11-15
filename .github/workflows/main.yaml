@@ -20,7 +20,7 @@ jobs:
           # Use github.event.before, which should represent the SHA of the
           # previous commit on master, as the ref to diff against.
           # This should do the right thing in the case of merge commits.
-          if [ -z "$(git diff-tree --name-only -r HEAD **/atlantis.yaml)" ]; then
+          if [ -z "$(git diff-tree --name-only ${{ github.event.pull_request.base.sha }} ${{ github.sha }} **/atlantis.yaml)" ]; then
             echo "Atlantis yaml $1 unchanged"
             exit 0
           fi
@@ -32,12 +32,12 @@ jobs:
           # Use github.event.before, which should represent the SHA of the
           # previous commit on master, as the ref to diff against.
           # This should do the right thing in the case of merge commits.
-          if [ -z "$(git diff-tree --name-only -r HEAD **/*.tf)" ] || [ -z "$(git diff-tree --name-only -r HEAD **/*.tfvalues)" ]; then
+          if [ -z "$(git diff-tree --name-only ${{ github.event.pull_request.base.sha }} ${{ github.sha }} **/*.tf)" ] || [ -z "$(git diff-tree --name-only ${{ github.event.pull_request.base.sha }} ${{ github.sha }} **/*.tfvalues)" ]; then
             echo "terraform unchanged"
             exit 0
           fi
 
-          echo "tf_changed=changes" >> $GITHUB_OUTPUT
+          echo "tf_changed=changed" >> $GITHUB_OUTPUT
 
       - name: Print output
         if: steps.check_atlantis.outputs.atlantis_changed == 'changed' && steps.check_tf.outputs.tf_changed == 'changed'
