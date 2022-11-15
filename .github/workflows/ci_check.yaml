@@ -44,5 +44,5 @@ jobs:
       - name: Print output
         if: steps.check_atlantis.outputs.atlantis_changed == 'changed' && steps.check_tf.outputs.tf_changed == 'changed'
         run: |
-          echo "Changes to `atlantis.yaml` have to be done independently from changes to any terraform files"
+          echo "Changes to atlantis.yaml have to be done independently from changes to any terraform files"
           exit 1
