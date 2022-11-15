@@ -24,6 +24,8 @@ jobs:
           # This should do the right thing in the case of merge commits.
           if [ "$(git diff-tree --exit-code ${{ github.event.pull_request.base.sha }} HEAD **/atlantis.yaml)" ]; then
             echo "atlantis_changed=changed" >> $GITHUB_OUTPUT
+          else
+            echo "atlantis_changed=unchanged" >> $GITHUB_OUTPUT
           fi
 
       - name: Check changes to any TF
@@ -34,6 +36,8 @@ jobs:
           # This should do the right thing in the case of merge commits.
           if [ "$(git diff-tree --exit-code ${{ github.event.pull_request.base.sha }} ${{ github.sha }} **/*.tf)" ] || [ "$(git diff-tree --exit-code ${{ github.event.pull_request.base.sha }} HEAD **/*.tfvalues)" ]; then
             echo "tf_changed=changed" >> $GITHUB_OUTPUT
+          else
+            echo "tf_changed=unchanged" >> $GITHUB_OUTPUT
           fi
 
       - name: Print output
