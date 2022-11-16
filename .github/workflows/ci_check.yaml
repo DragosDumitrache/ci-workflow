@@ -23,7 +23,7 @@ jobs:
           # previous commit on master, as the ref to diff against.
           # This should do the right thing in the case of merge commits.
           pr_head=$(git rev-parse HEAD)
-          main_head=$(git rev-parse main)
+          main_head=$(git rev-parse origin/main)
           if [[ "$(git diff-tree --exit-code -r  $pr_head $main_head -- **/atlantis.yaml)" ]]; then
             echo "atlantis_changed=changed" >> $GITHUB_OUTPUT
           else
@@ -37,7 +37,7 @@ jobs:
           # previous commit on master, as the ref to diff against.
           # This should do the right thing in the case of merge commits.
           pr_head=$(git rev-parse HEAD)
-          main_head=$(git rev-parse main)
+          main_head=$(git rev-parse origin/main)
           if [[ "$(git diff-tree --exit-code -r  $pr_head $main_head -- **/*.tf)" || "$(git diff-tree --exit-code -r  $pr_head $main_head -- **/*.tfvalues)" ]]; then
             echo "tf_changed=changed" >> $GITHUB_OUTPUT
           else
