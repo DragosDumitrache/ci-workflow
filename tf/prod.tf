@@ -1,0 +1,3 @@
+variable "hello" {
+  value = "World!"
+}
