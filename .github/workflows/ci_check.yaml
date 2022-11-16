@@ -1,0 +1,53 @@
+name: CI Check
+on:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Check changes to topic atlantis.yaml
+        id: check_atlantis
+        run: |
+          # Use github.event.before, which should represent the SHA of the
+          # previous commit on master, as the ref to diff against.
+          # This should do the right thing in the case of merge commits.
+          pr_head=$(git rev-parse HEAD)
+          main_head=$(git rev-parse origin/main)
+          if [[ "$(git diff-tree --exit-code -r  $pr_head $main_head -- **/atlantis.yaml)" ]]; then
+            echo "atlantis_changed=changed" >> $GITHUB_OUTPUT
+          else
+            echo "atlantis_changed=unchanged" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Check changes to any TF
+        id: check_tf
+        run: |
+          # Use github.event.before, which should represent the SHA of the
+          # previous commit on master, as the ref to diff against.
+          # This should do the right thing in the case of merge commits.
+          pr_head=$(git rev-parse HEAD)
+          main_head=$(git rev-parse origin/main)
+          if [[ "$(git diff-tree --exit-code -r  $pr_head $main_head -- **/*.tf)" || "$(git diff-tree --exit-code -r  $pr_head $main_head -- **/*.tfvalues)" ]]; then
+            echo "tf_changed=changed" >> $GITHUB_OUTPUT
+          else
+            echo "tf_changed=unchanged" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Print output
+        if: steps.check_atlantis.outputs.atlantis_changed == 'changed' && steps.check_tf.outputs.tf_changed == 'changed'
+        run: |
+          echo "Atlantis: ${{ steps.check_atlantis.outputs.atlantis_changed }}"
+          echo "Terraform: ${{ steps.check_tf.outputs.tf_changed }}"
+          echo "Changes to atlantis.yaml have to be done independently from changes to any terraform files"
+          exit 1
