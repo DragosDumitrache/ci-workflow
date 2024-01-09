@@ -27,7 +27,7 @@ jobs:
           git config --global user.email robot@omnipresent.com
           git config --global user.name "GHA Robot"
 
-          git branch --show-current
+          echo $(git branch --show-current)
 
           echo ${{ steps.versioner.outputs.version }}
 #          git tag -a ${{ steps.versioner.outputs.version }} -m ${{ steps.versioner.outputs.version }}
